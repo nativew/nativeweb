@@ -1,6 +1,7 @@
 {
   "name": "nativeweb",
   "version": "0.1.0",
+  "description": "Simple & tiny web components library for building fast websites. (1kB)",
   "repository": "nativew/nativeweb",
   "author": "Antoine Boulanger <hello@antoineboulanger.com> (https://antoineboulanger.com)",
   "license": "ISC",

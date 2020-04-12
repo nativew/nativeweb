@@ -1,9 +1,11 @@
 <div align="center">
+    <br>
     <p>
         <a href="https://github.com/nativew/nativeweb">
             <img src="https://raw.githubusercontent.com/nativew/nativeweb/53f89acb2c33dfe5909c80770f61bc26e6090a5d/logo.svg?sanitize=true" alt="Native Web" width="300px">
         </a>
     </p>
+    <br>
     <p>Simple & tiny web components library for building fast websites.</p>
     <p>🚧 <strong>Work in progress</strong></p>
 </div>
