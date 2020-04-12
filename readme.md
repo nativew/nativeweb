@@ -319,12 +319,13 @@ customElements.define('hey-example', HeyExample);
 ```
 
 ## 🤝 License 
-[ISC License](https://choosealicense.com/licenses/isc/)
+[ISC](https://choosealicense.com/licenses/isc/)
 
 <div align="center">
     <br>
-    <a href="https://github.com/nativew/nativeweb">
-        <img src="https://raw.githubusercontent.com/nativew/nativeweb/53d4fe591d5992c81b3faeb656fd1aea7aabb413/logo-square.svg?sanitize=true" alt="Native Web" width="100px">
-    </a>
-    <br>
+    <p>
+        <a href="https://github.com/nativew/nativeweb">
+            <img src="https://raw.githubusercontent.com/nativew/nativeweb/53d4fe591d5992c81b3faeb656fd1aea7aabb413/logo-square.svg?sanitize=true" alt="Native Web" width="100px">
+        </a>
+    </p>
 </div>
