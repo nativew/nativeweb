@@ -24,8 +24,8 @@
 Make the web simple and fast again while being maintainable and accessible.
 
 ## ✨ How
-- 💀 **Dead simple**. Web components simplified. JavaScript like you are used to, encapsulated and enhanced with the simplest API, no complicated new paradigms to learn. Get started instantly with the [starter](https://github.com/nativew/starter).
-- 🤪 **Stupid fast**. A thin layer above the native web components already included in your browser. No heavy framework required. _Native Web (**1kB**) vs LitElement (7kB) vs React (39kB) gzipped._
+- 💀 **Dead simple**. Web components simplified. JavaScript like you are used to, encapsulated and enhanced with the simplest API, no complicated new paradigms to learn. Get started instantly with [Start](https://github.com/nativew/start).
+- 🤪 **Stupid fast**. A thin layer above the native web components already included in your browser. No heavy framework required. _Native Web (**1kB**) vs LitElement (7kB) vs React (36kB) gzipped._
 - 👽 **Extra maintainable**. Modules are easy to maintain and reuse. Shadow DOM and custom elements are the native way of creating encapsulated components.
 - 😈 **Mad accessible**. The pre-built base components are already accessible. Nothing to do here.
 
@@ -319,7 +319,7 @@ customElements.define('hey-example', HeyExample);
 ```
 
 ## 🤝 License 
-[ISC](https://choosealicense.com/licenses/isc/)
+[ISC](https://github.com/nativew/nativeweb/blob/master/license)
 
 <div align="center">
     <br>
