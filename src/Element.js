@@ -142,9 +142,7 @@ export class Element extends HTMLElement {
 
 			if (el.attributes && el.attributes.length) {
 				// Get attributes that starts with @
-				const attrs = Array.from(el.attributes).filter(({ name }) =>
-					name.startsWith('@')
-				);
+				const attrs = Array.from(el.attributes).filter(({ name }) => name.startsWith('@'));
 				// Call events method
 				attrs.forEach(a => this._callEventMethod(e, el, a.name));
 			}

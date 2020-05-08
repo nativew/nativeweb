@@ -8,7 +8,7 @@
 	"main": "dist/nativeweb.js",
 	"module": "dist/nativeweb.js",
 	"scripts": {
-		"format": "prettier --write 'src/*'",
+		"format": "prettier --write 'src/*.js'",
 		"build": "npm run format && rollup -c"
 	},
 	"devDependencies": {
