@@ -26,11 +26,11 @@ export class Element extends HTMLElement {
 	}
 
 	_setStyles(styles) {
-		typeof styles === 'object'
+		this.shadowRoot.adoptedStyleSheets
 			? // If stylesheet, adopt it
-			  (this.shadowRoot.adoptedStyleSheets = [styles])
+			  (this.shadowRoot.adoptedStyleSheets = [].concat(styles))
 			: // Else assign styles
-			  (this._styles = styles);
+			  (this._styles = Array.isArray(styles) ? styles.join('') : styles);
 	}
 
 	_insertRender() {
