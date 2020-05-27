@@ -90,7 +90,7 @@ customElements.define('hey-example', HeyExample);
 ### Styles
 | Method | Description |
 | ------ | ----------- |
-| [``const styles = css` ` ``](#simple-component) | Add your styles to the `css` tag function and pass it to the constructor as `super(styles)`. It can live [above your class](#simple-component) or in an [external file](#external-styles).
+| [``const styles = css` ` ``](#simple-component) | Add your styles to the `css` tag function and pass it to the `constructor` as `super(styles)`. It can live [above your class](#simple-component) or in an [external file](#external-styles) and it can be an `Array` to [share styles](#share-styles).
 ### Getters
 | Method | Description |
 | ------ | ----------- |
@@ -125,7 +125,6 @@ const styles = css`
 `;
 
 export default styles;
-
 ```
 ```js
 import { Element } from 'nativeweb';
@@ -147,6 +146,47 @@ customElements.define('hey-example', HeyExample);
 ```
 ```html
 <hey-example></hey-example>
+```
+
+### Share styles
+```js
+import { css } from 'nativeweb';
+
+export const base = css`
+    img {
+        max-width: 100%;
+    }
+`;
+```
+```js
+import { css } from 'nativeweb';
+import { base } from '../style';
+
+const styles = [base, css`
+    :host {
+        border-radius: 50%;
+    }
+`];
+
+export default styles;
+```
+```js
+import { Element } from 'nativeweb';
+import styles from './profile-example.css.js';
+
+export class ProfileExample extends Element {
+    constructor() {
+        super(styles);
+    }
+
+    render() {
+        return `
+            <img src="image.jpg">
+        `;
+    }
+}
+
+customElements.define('profile-example', ProfileExample);
 ```
 
 ### Properties
