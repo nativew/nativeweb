@@ -90,7 +90,7 @@ customElements.define('hey-example', HeyExample);
 ### Styles
 | Method | Description |
 | ------ | ----------- |
-| [``const styles = css` ` ``](#simple-component) | Add your styles to the `css` tag function and pass it to the `constructor` as `super(styles)`. It can live [above your class](#simple-component) or in an [external file](#external-styles) and it can be an `Array` to [share styles](#share-styles).
+| [``const styles = css` ` ``](#simple-component) | Add your styles to the `css` tag function and pass it to the `constructor` as `super(styles)` or `super(styles, childStyles)`. It can live [above your class](#simple-component) or in an [external file](#external-styles) and it can be an `Array` to [share styles](#shared-styles).
 ### Getters
 | Method | Description |
 | ------ | ----------- |
@@ -146,47 +146,6 @@ customElements.define('hey-example', HeyExample);
 ```
 ```html
 <hey-example></hey-example>
-```
-
-### Share styles
-```js
-import { css } from 'nativeweb';
-
-export const base = css`
-    img {
-        max-width: 100%;
-    }
-`;
-```
-```js
-import { css } from 'nativeweb';
-import { base } from '../style';
-
-const styles = [base, css`
-    :host {
-        border-radius: 50%;
-    }
-`];
-
-export default styles;
-```
-```js
-import { Element } from 'nativeweb';
-import styles from './profile-example.css.js';
-
-export class ProfileExample extends Element {
-    constructor() {
-        super(styles);
-    }
-
-    render() {
-        return `
-            <img src="image.jpg">
-        `;
-    }
-}
-
-customElements.define('profile-example', ProfileExample);
 ```
 
 ### Properties
@@ -280,6 +239,78 @@ customElements.define('second-component', SecondComponent);
 ```html
 <first-component></first-component>
 <second-component></second-component>
+```
+
+### Shared styles
+```js
+import { css } from 'nativeweb';
+
+export const base = css`
+    img {
+        max-width: 100%;
+    }
+`;
+```
+```js
+import { css } from 'nativeweb';
+import { base } from '../style';
+
+const styles = [base, css`
+    :host {
+        border-radius: 50%;
+    }
+`];
+
+export default styles;
+```
+```js
+import { Element } from 'nativeweb';
+import styles from './profile-example.css.js';
+
+export class ProfileExample extends Element {
+    constructor() {
+        super(styles);
+    }
+
+    render() {
+        return `
+            <img src="image.jpg">
+        `;
+    }
+}
+
+customElements.define('profile-example', ProfileExample);
+```
+
+### Extend styles
+```js
+import { Element } from 'nativeweb';
+import styles from './profile-base.css.js';
+
+export class ProfileBase extends Element {
+    constructor(childStyles) {
+		super(styles, childStyles);
+	}
+
+    render() {
+        return `
+            <img src="image.jpg">
+        `;
+    }
+}
+
+customElements.define('profile-base', ProfileBase);
+```
+```js
+import styles from './profile-circle.css.js';
+
+export class ProfileCircle extends ProfileBase {
+    constructor() {
+        super(styles);
+    }
+}
+
+customElements.define('profile-circle', ProfileCircle);
 ```
 
 ### Conditional rendering 

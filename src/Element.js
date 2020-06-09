@@ -1,10 +1,10 @@
 export class Element extends HTMLElement {
-	constructor(styles) {
+	constructor(styles, childStyles) {
 		super();
 		// Set shadow DOM
 		this.attachShadow({ mode: 'open' });
 		// Set styles
-		styles && this._setStyles(styles);
+		styles && this._setStyles(styles, childStyles);
 	}
 
 	connectedCallback() {
@@ -25,12 +25,15 @@ export class Element extends HTMLElement {
 		this.disconnected();
 	}
 
-	_setStyles(styles) {
+	_setStyles(styles, childStyles) {
+		// Combine styles with child styles
+		const combinedStyles = [].concat(styles, childStyles ? childStyles : []);
+
 		this.shadowRoot.adoptedStyleSheets
-			? // If stylesheet, adopt it
-			  (this.shadowRoot.adoptedStyleSheets = [].concat(styles))
+			? // If supports stylesheet, adopt it
+			  (this.shadowRoot.adoptedStyleSheets = combinedStyles)
 			: // Else assign styles
-			  (this._styles = Array.isArray(styles) ? styles.join('') : styles);
+			  (this._styles = combinedStyles.join(''));
 	}
 
 	_insertRender() {
