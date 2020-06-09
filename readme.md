@@ -289,8 +289,8 @@ import styles from './profile-base.css.js';
 
 export class ProfileBase extends Element {
     constructor(childStyles) {
-		super(styles, childStyles);
-	}
+        super(styles, childStyles);
+    }
 
     render() {
         return `
