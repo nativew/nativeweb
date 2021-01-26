@@ -2,401 +2,391 @@
     <br>
     <p>
         <a href="https://github.com/nativew/nativeweb">
-            <img src="https://raw.githubusercontent.com/nativew/nativeweb/53f89acb2c33dfe5909c80770f61bc26e6090a5d/logo.svg?sanitize=true" alt="Native Web" width="300px">
+            <img src="https://raw.githubusercontent.com/nativew/nativeweb/1e9405c629e3a6491bb59df726044eb3823967bb/logo-rectangle_nativeweb.svg" alt="Native Web">
         </a>
     </p>
+    <p>
+        Tiny library for simple web components. <br>
+        <sub><code>1kB</code></sub>
+    </p>
     <br>
-    <p>Simple & tiny web components library for building fast websites.</p>
-    <p>🚧 <strong>Work in progress</strong></p>
 </div>
 
-## 📚 Contents
-- 🧠 [Goal](#-goal)
-- ✨ [How](#-how)
-- 🚀 [Start](#-start)
-- 🏄‍♂️ [Use](#%EF%B8%8F-use)
-- 🧐 [Concepts](#-concepts)
-- 🍱 [API](#-api)
-- 🏋️‍♂️ [Examples](#%EF%B8%8F%EF%B8%8F-examples)
-- 🤝 [License](#-license)
+<br>
 
-## 🧠 Goal
-Make the web simple and fast again while being maintainable and accessible.
-
-## ✨ How
-- 💀 **Dead simple**. Web components simplified. JavaScript like you are used to, encapsulated and enhanced with the simplest API, no complicated new paradigms to learn. Get started instantly with [Start](https://github.com/nativew/start).
-- 🤪 **Stupid fast**. A thin layer above the native web components already included in your browser. No heavy framework required. _Native Web (**1kB**) vs LitElement (7kB) vs React (36kB) gzipped._
-- 👽 **Extra maintainable**. Modules are easy to maintain and reuse. Shadow DOM and custom elements are the native way of creating encapsulated components.
-- 😈 **Mad accessible**. The pre-built base components are already accessible. Nothing to do here.
-
-## 🚀 Start
-### New project
-```zsh
-# Create a new project
-npm init nativeweb
-
-# And run it 👟
-npm start
-```
-### Existing project
-```zsh
-# Add to an existing project
-npm install nativeweb
-
-# And import it in your JS files ⬇️
-```
-
-## 🏄‍♂️ Use
-### Simple component
 ```js
-import { Element, css } from 'nativeweb';
+import { component, property, Element } from 'nativeweb';
 
-const styles = css`
-    .hey {
-        font-size: 4rem;
+@component('hey-internet')
+export class HeyInternet extends Element {
+    @property() emoji;
+
+    render() {
+        return `
+            <h1>Hey Internet ${this.emoji}</h1>
+        `;
+    }
+}
+```
+
+```html
+<hey-internet emoji="👋"></hey-internet>
+```
+
+<br>
+
+### Native web components
+
+### Encapsulated styles and scripts
+
+### Simplified with decorators
+
+### Tiny footprint
+
+<br>
+
+### One command to [start](https://github.com/nativew/start)
+
+```zsh
+npm init nativeweb
+```
+
+<br>
+
+### Or add to your existing project
+
+```zsh
+npm install nativeweb
+```
+
+<br>
+
+### Decorators
+
+[`@component`](#component)
+
+[`@property`](#property)
+
+[`@event`](#event)
+
+[`@customEvent`](#customevent)
+
+[`@query`](#query)
+
+[`@queryAll`](#queryall)
+
+<br>
+
+### `@component`
+
+Define a custom element and add styles. From an external file or the same file. `styles` can be an `array` of styles.
+
+```js
+import { component, Element } from 'nativeweb';
+import { styles } from './hey-styles.css.js';
+
+@component('some-styles', styles)
+export class SomeStyles extends Element {
+    render() {
+        return `
+            <h1>Some Styles</h1>
+        `;
+    }
+}
+```
+
+```js
+import { css } from 'nativeweb';
+
+export const styles = css`
+    h1 {
+        color: orange;
     }
 `;
+```
 
-export class HeyExample extends Element {
-    constructor() {
-        super(styles);
+```html
+<hey-styles></hey-styles>
+```
+
+<br>
+
+### `@property`
+
+Get an attribute converted to the specified type or define a property with an optional default value.  
+`String`, `Boolean`, `Number`, `Array` or `Object`.
+
+```js
+import { component, property, Element } from 'nativeweb';
+
+@component('cool-property')
+export class CoolProperty extends Element {
+    @property() cool = 'Cool Prop';
+    @property(String) title = 'Default Title';
+    @property(Number) multiplier;
+
+    render() {
+        return `
+            <h1>${this.title}</h1>
+            <h2>${this.cool} ➡️ ${2 * this.multiplier}</h2>
+        `;
+    }
+}
+```
+
+```html
+<cool-property title="Cool Title 🤙" multiplier="3"></cool-property>
+```
+
+<br>
+
+### `@event`
+
+Add an event listener to a component, a child element named `@name` or an external component event.
+
+```js
+import { component, event, Element } from 'nativeweb';
+
+@component('easy-event')
+export class EasyEvent extends Element {
+    @event() mouseenter = this.onHover();
+    @event() click = {
+        title: this.onClick(),
+        button: this.onClick()
+    };
+    @event() ready = {
+        OtherComponent: this.onReady()
+    };
+
+    onHover() {
+        console.log('Hover Component');
+    }
+    onClick(e) {
+        console.log(e.currentTarget);
+    }
+    onReady({ detail }) {
+        console.log(detail);
     }
 
     render() {
         return `
-            <h1 class="hey">Hey✌️</h1>
+            <h1 @title>Easy Event</h1>
+            <button @button>Click Me</button>
         `;
     }
 }
-
-customElements.define('hey-example', HeyExample);
 ```
 
 ```html
-<hey-example></hey-example>
+<easy-event></easy-event>
 ```
 
-## 🧐 Concepts
-- **Encapsulation**. Both the JavaScript and CSS of each component are encapsulated using the native [Shadow DOM](https://developers.google.com/web/fundamentals/web-components/shadowdom) API. No need to worry about namespacing your classes anymore.
-- **Styles**. They are shared between components instances using [Constructable Stylesheets](https://developers.google.com/web/updates/2019/02/constructable-stylesheets) or fallback to the normal style tag. They can either be in the component's file or in an external styles file.
-- **Properties**. In custom elements, attributes are always strings. With `static get properties()` your attributes are converted to the specified type and are accessible with `this.propertyname`.
-- **Events**. You can attach events using `static get events()` by specifying the event, the function called and the element with an `@` attribute. Events are automatically destroyed when the element is removed from the DOM.
-- **Templates**. With the `render()` function, the returned [template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) is inserted. You can use the native placeholders `${expression}` for templating. 
-- **Interoperability**. Like events, you can listen to other components events by adding the component name to the `static get events()` getter instead of an `@` element. The event can be created with the `this.newEvent()` method.
-- **Lifecycle**. You can use the `connected()` and `disconnected()` lifecycle methods in your components.
-- **Selector**. To select elements in your component, we shortened the `this.shadowRoot.querySelectorAll()` query to `this.$('@element')`.
+<br>
 
-## 🍱 API 
-### Styles
-| Method | Description |
-| ------ | ----------- |
-| [``const styles = css` ` ``](#simple-component) | Add your styles to the `css` tag function and pass it to the `constructor` as `super(styles)` or `super(styles, childStyles)`. It can live [above your class](#simple-component) or in an [external file](#external-styles) and it can be an `Array` to [share styles](#shared-styles).
-### Getters
-| Method | Description |
-| ------ | ----------- |
-| [`static get properties()`](#properties) | Return your properties with a type as value `String`, `Number`, `Boolean`, `Object` or `Array`. They are accessible with `this.propertyname`. | 
-| [`static get events()`](#events) | Return your events with a function name as the value `event: 'func'`, an element name  `event: { '@element': 'func' }` or an [external component](#external-events) name `event: { 'Component': 'func' }`. They are destroyed when the element disconnects. |
+### `@customEvent`
+
+Create a custom global event, namespaced with the component name. Ready to be dispatched. The listener is in the [component above](#event).
+
+```js
+import { component, customEvent, Element } from 'nativeweb';
+
+@component('other-component')
+export class OtherComponent extends Element {
+    @customEvent() ready = 'Ready 🚀';
+
+    connected() {
+        dispatchEvent(this.ready);
+    }
+
+    render() {
+        return `
+            <h1>Other Component</h1>
+        `;
+    }
+}
+```
+
+```html
+<other-component></other-component>
+```
+
+<br>
+
+### `@query`
+
+Query selector an `@name` child element.
+
+```js
+import { component, query, Element } from 'nativeweb';
+
+@component('simple-query')
+export class SimpleQuery extends Element {
+    @query() title;
+
+    connected() {
+        this.title.innerText = 'Better Title 💯';
+    }
+
+    render() {
+        return `
+            <h1 @title>Good Title</h1>
+        `;
+    }
+}
+```
+
+```html
+<simple-query></simple-query>
+```
+
+<br>
+
+### `@queryAll`
+
+Query selector all `@name` child elements.
+
+```js
+import { component, queryAll, Element } from 'nativeweb';
+
+@component('all-query')
+export class AllQuery extends Element {
+    @queryAll() title;
+
+    connected() {
+        this.title.forEach(el => (el.style.color = 'lightgreen'));
+    }
+
+    render() {
+        return `
+            <h1 @title>One Title</h1>
+            <h2 @title>Other Title</h2>
+        `;
+    }
+}
+```
+
+```html
+<all-query></all-query>
+```
+
+<br>
 
 ### Lifecycle
-| Method | Description |
-| ------ | ----------- |
-| [`render()`](#conditional-rendering) | Return your template literal to be inserted in the DOM. Use the JavaScript placeholder `${expression}` for templating. |
-| [`connected()`](#selector) | Called when the element is inserted into the DOM. |
-| `disconnected()` | Called when the element is removed from the DOM. |
+
+`render()` &nbsp; → &nbsp; Renders the component.
+
+`connected()` &nbsp; → &nbsp; Called when the component is inserted in the DOM.
+
+`disconnected()` &nbsp; → &nbsp; Called when the component is removed from the DOM.
+
+`adopted()` &nbsp; → &nbsp; Called when the component is moved to a new document.
+
+`attributeChanged()` &nbsp; → &nbsp; Called when an observed attribute changes.
+
+<br>
 
 ### Methods
-| Method | Description |
-| ------ | ----------- |
-| [`this.newEvent('eventName'[, detail])`](#external-events) | Create a custom event to be listened from another component. Pass additional data with the optional detail.  |
-| [`this.$('@name'[, context])`](#selector) | Select an element with an `@` attribute, followed by a query if needed. Add a context `Object` for scoping. Returns a `NodeList`. |
-| `this.parent('@name', context)` | Select a parent element with an `@` attribute, followed by a query if needed, from a context `Object`. |
-| `this.update()` | Rerender the component. Updates the DOM. |
 
-## 🏋️‍♂️ Examples
+`this.update()` &nbsp; → &nbsp; Rerenders the component.
 
-### External styles
-```js
-import { css } from 'nativeweb';
+<br>
 
-const styles = css`
-    .hey {
-        font-size: 4rem;
-    }
-`;
+### Tips
 
-export default styles;
-```
-```js
-import { Element } from 'nativeweb';
-import styles from './hey-example.css.js';
+[Composition](#composition)
 
-export class HeyExample extends Element {
-    constructor() {
-        super(styles);
-    }
+[Conditional](#conditional)
 
-    render() {
-        return `
-            <h1 class="hey">Hey✌️</h1>
-        `;
-    }
-}
+[Loop](#loop)
 
-customElements.define('hey-example', HeyExample);
-```
-```html
-<hey-example></hey-example>
-```
-
-### Properties
-```js
-import { Element } from 'nativeweb';
-
-export class HeaderExample extends Element {
-    static get properties() {
-        return {
-            heading: String
-        };
-    }
-
-    render() {
-        return `
-            <header>
-                <h1>${this.heading}</h1>
-            </header>
-        `;
-    }
-}
-
-customElements.define('header-example', HeaderExample);
-```
-```html
-<header-example heading="Heading"></header-example>
-```
-
-### Events 
-```js
-import { Element } from 'nativeweb';
-
-export class ButtonExample extends Element {
-    static get events() {
-        return {
-            click: {
-                '@button': 'doSomething'
-            }
-        };
-    }
-
-    doSomething() {
-        console.log('👻');
-    }
-
-    render() {
-        return `
-            <button @button>Click me!</button>
-        `;
-    }
-}
-
-customElements.define('button-example', ButtonExample);
-```
-```html
-<button-example></button-example>
-```
-
-### External events 
-```js
-import { Element } from 'nativeweb';
-
-export class FirstComponent extends Element {
-    static get events() {
-        return {
-            ready: {
-                'SecondComponent': 'showMe'
-            }
-        };
-    }
-
-    showMe(e) {
-        console.log(e.detail);
-    }
-}
-
-customElements.define('first-component', FirstComponent);
-```
-```js
-import { Element } from 'nativeweb';
-
-export class SecondComponent extends Element {
-    connected() {
-        const readyEvent = this.newEvent('ready', 'I am ready 😎');
-        dispatchEvent(readyEvent);
-    }
-}
-
-customElements.define('second-component', SecondComponent);
-```
-```html
-<first-component></first-component>
-<second-component></second-component>
-```
-
-### Shared styles
-```js
-import { css } from 'nativeweb';
-
-export const base = css`
-    img {
-        max-width: 100%;
-    }
-`;
-```
-```js
-import { css } from 'nativeweb';
-import { base } from '../style';
-
-const styles = [base, css`
-    :host {
-        border-radius: 50%;
-    }
-`];
-
-export default styles;
-```
-```js
-import { Element } from 'nativeweb';
-import styles from './profile-example.css.js';
-
-export class ProfileExample extends Element {
-    constructor() {
-        super(styles);
-    }
-
-    render() {
-        return `
-            <img src="image.jpg">
-        `;
-    }
-}
-
-customElements.define('profile-example', ProfileExample);
-```
-
-### Extend styles
-```js
-import { Element } from 'nativeweb';
-import styles from './profile-base.css.js';
-
-export class ProfileBase extends Element {
-    constructor(childStyles) {
-        super(styles, childStyles);
-    }
-
-    render() {
-        return `
-            <img src="image.jpg">
-        `;
-    }
-}
-
-customElements.define('profile-base', ProfileBase);
-```
-```js
-import styles from './profile-circle.css.js';
-
-export class ProfileCircle extends ProfileBase {
-    constructor() {
-        super(styles);
-    }
-}
-
-customElements.define('profile-circle', ProfileCircle);
-```
-
-### Conditional rendering 
-```js
-import { Element } from 'nativeweb';
-
-export class HeaderExample extends Element {
-    static get properties() {
-        return {
-            heading: String,
-            description: String
-        };
-    }
-
-    render() {
-        return `
-            <header>
-                ${this.heading ? `<h1>${this.heading}</h1>` : `<p>Default</p>`}
-                ${this.description && `<p>${this.description}</p>`}
-            </header>
-        `;
-    }
-}
-
-customElements.define('header-example', HeaderExample);
-```
-```html
-<header-example heading="Heading" description="Description"></header-example>
-```
+<br>
 
 ### Composition
-```js
-import { Element } from 'nativeweb';
 
-export class SectionExample extends Element {
+Component composition with default slot and named slot.
+
+```js
+import { component, Element } from 'nativeweb';
+
+@component('slot-example')
+export class SlotExample extends Element {
     render() {
         return `
-            <section>
-                <header>
-                    <slot name="heading"></slot>
-                </heading>
+            <header>
+                <h1><slot name="title"></slot></h1>
                 <slot></slot>
-            </section>
+            </header>
         `;
     }
 }
-
-customElements.define('section-example', SectionExample);
 ```
+
 ```html
-<section-example>
-    <h2 slot="heading">Heading</h2>
-    <p>Text</p>
-</section-example>
+<slot-example>
+    <span slot="title">Named slot</span>
+    <p>Default slot</p>
+</slot-example>
 ```
 
-### Selector
-```js
-import { Element } from 'nativeweb';
+<br>
 
-export class HeyExample extends Element {
-    connected() {
-        this.$('@heading').innerText = 'Redacted';
-    }
-    
+### Conditional
+
+Conditional rendering in vanilla JS.
+
+```js
+import { component, property, Element } from 'nativeweb';
+
+@component('condition-example')
+export class ConditionExample extends Element {
+    @property() isGood = false;
+
     render() {
         return `
-            <h1 @heading>Hey✌️</h1>
+            ${this.isGood ? `<h1>Good</h1>` : ``}
         `;
     }
 }
-    
-customElements.define('hey-example', HeyExample);
-```
-```html
-<hey-example></hey-example>
 ```
 
-## 🤝 License 
-[ISC](https://github.com/nativew/nativeweb/blob/master/license)
+```html
+<condition-example></condition-example>
+```
+
+<br>
+
+### Loop
+
+Render loop in vanilla JS.
+
+```js
+import { component, property, Element } from 'nativeweb';
+
+@component('loop-example')
+export class LoopExample extends Element {
+    @property() emojis = ['🤳', '🧨', '🧱'];
+
+    render() {
+        return `
+            ${this.emojis.map(item => `<span>${item}</span>`).join('')}
+        `;
+    }
+}
+```
+
+```html
+<loop-example></loop-example>
+```
+
+<br>
 
 <div align="center">
     <br>
     <p>
         <a href="https://github.com/nativew/nativeweb">
-            <img src="https://raw.githubusercontent.com/nativew/nativeweb/53d4fe591d5992c81b3faeb656fd1aea7aabb413/logo-square.svg?sanitize=true" alt="Native Web" width="100px">
+            <img src="https://raw.githubusercontent.com/nativew/nativeweb/1e9405c629e3a6491bb59df726044eb3823967bb/logo-square_nativeweb.svg" alt="Native Web">
         </a>
     </p>
 </div>
+
+<br>

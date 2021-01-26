@@ -1,2 +1,9 @@
-export { Element } from './Element.js';
+export { component } from './component.js';
 export { css } from './css.js';
+export { customEvent } from './customEvent.js';
+export { Element } from './Element.js';
+export { event } from './event.js';
+export { property } from './property.js';
+export { query } from './query.js';
+export { queryAll } from './queryAll.js';
+export { styles } from './styles.js';

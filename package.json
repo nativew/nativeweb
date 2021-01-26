@@ -1,24 +1,36 @@
 {
 	"name": "nativeweb",
 	"version": "0.3.0",
-	"description": "🤳 Simple & tiny web components library for building fast websites. (1kB)",
+	"description": "🤳 Tiny library for simple web components. [1kB]",
+	"homepage": "nativeweb.dev",
 	"repository": "nativew/nativeweb",
 	"author": "Antoine Boulanger (https://github.com/antoineboulanger)",
 	"license": "ISC",
-	"main": "dist/nativeweb.js",
-	"module": "dist/nativeweb.js",
+	"exports": "./index.js",
+	"main": "index.js",
+	"module": "index.js",
+	"type": "module",
 	"scripts": {
-		"format": "prettier --write 'src/*.js'",
-		"build": "npm run format && rollup -c"
+		"format": "prettier --write --ignore-unknown '**/*'",
+		"start": "node build.config.js -w",
+		"build": "npm run format && node build.config.js"
 	},
 	"devDependencies": {
-		"@rollup/plugin-node-resolve": "^7.1.1",
-		"prettier": "^1.19.1",
-		"rollup": "^2.1.0",
-		"rollup-plugin-filesize": "^6.2.1",
-		"rollup-plugin-terser": "^5.3.0"
+		"@nativeweb/build": "^1.0.2",
+		"prettier": "^2.2.1"
 	},
 	"files": [
-		"dist"
+		"index.js"
+	],
+	"keywords": [
+		"web components",
+		"components",
+		"library",
+		"framework",
+		"decorators",
+		"js",
+		"javascript",
+		"starter",
+		"boilerplate"
 	]
 }
