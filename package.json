@@ -1,6 +1,6 @@
 {
 	"name": "nativeweb",
-	"version": "0.3.0",
+	"version": "1.0.0",
 	"description": "🤳 Tiny library for simple web components. [1kB]",
 	"homepage": "nativeweb.dev",
 	"repository": "nativew/nativeweb",
