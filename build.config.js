@@ -8,7 +8,6 @@ build(
 		target: 'esnext'
 	},
 	{
-		root: 'test',
-		ignore: '**/*.map'
+		root: 'test'
 	}
 );
