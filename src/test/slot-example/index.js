@@ -1,1 +1,1 @@
-export { SlotExample } from './slot-example.js';
+export * from './slot-example';

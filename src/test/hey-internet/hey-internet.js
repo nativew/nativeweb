@@ -1,7 +1,7 @@
 import { component, property, Element } from '../..';
 
 @component('hey-internet')
-export class HeyInternet extends Element {
+class Component extends Element {
 	@property() emoji;
 
 	render() {

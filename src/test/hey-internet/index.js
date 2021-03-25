@@ -1,1 +1,1 @@
-export { HeyInternet } from './hey-internet.js';
+export * from './hey-internet';

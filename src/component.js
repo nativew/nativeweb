@@ -1,5 +1,4 @@
 import { styles } from './styles';
-import { pascalCase } from './utils';
 
 export const component = (name, css) => descriptor => {
 	const { kind, elements } = descriptor;
@@ -10,7 +9,7 @@ export const component = (name, css) => descriptor => {
 		kind,
 		elements,
 		finisher(cla) {
-			cla.prototype._name = pascalCase(name);
+			cla.prototype._name = name;
 			window.customElements.define(name, cla);
 		}
 	};

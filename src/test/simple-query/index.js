@@ -1,1 +1,1 @@
-export { SimpleQuery } from './simple-query.js';
+export * from './simple-query';

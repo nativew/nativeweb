@@ -1,7 +1,7 @@
 import { component, property, Element } from '../..';
 
 @component('loop-example')
-export class LoopExample extends Element {
+class Component extends Element {
 	@property() emojis = ['🤳', '🧨', '🧱'];
 
 	render() {

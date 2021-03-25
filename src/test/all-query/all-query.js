@@ -1,7 +1,7 @@
 import { component, queryAll, Element } from '../..';
 
 @component('all-query')
-export class AllQuery extends Element {
+class Component extends Element {
 	@queryAll() title;
 
 	connected() {

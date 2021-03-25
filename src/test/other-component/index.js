@@ -1,1 +1,1 @@
-export { OtherComponent } from './other-component.js';
+export * from './other-component';

@@ -1,1 +1,1 @@
-export { SomeStyles } from './some-styles.js';
+export * from './some-styles';

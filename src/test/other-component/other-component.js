@@ -1,7 +1,7 @@
 import { component, customEvent, Element } from '../..';
 
 @component('other-component')
-export class OtherComponent extends Element {
+class Component extends Element {
 	@customEvent() ready = 'Ready 🚀';
 
 	connected() {

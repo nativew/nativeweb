@@ -1,1 +1,1 @@
-export { LoopExample } from './loop-example.js';
+export * from './loop-example';

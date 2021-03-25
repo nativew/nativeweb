@@ -1,1 +1,1 @@
-export { ConditionExample } from './condition-example.js';
+export * from './condition-example';

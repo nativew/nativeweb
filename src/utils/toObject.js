@@ -4,6 +4,9 @@ export const toObject = string => {
 
 	for (let k of arr) {
 		k = k.split(':');
+
+		if (k[0].startsWith('"')) k[0] = k[0].slice(1, -1);
+
 		obj[k[0]] = k[1];
 	}
 

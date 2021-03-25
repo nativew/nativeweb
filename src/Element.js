@@ -49,4 +49,10 @@ export class Element extends HTMLElement {
 	adopted() {}
 
 	attributeChanged(name, oldValue, newValue) {}
+
+	get properties() {
+		return Object.values(this.attributes)
+			.map(a => `${a.name}="${a.value}"`)
+			.join(' ');
+	}
 }

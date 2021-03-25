@@ -1,6 +1,6 @@
 import { css } from '../..';
 
-export const styles = css`
+export default css`
 	h1 {
 		color: orange;
 	}

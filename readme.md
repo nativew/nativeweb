@@ -18,7 +18,7 @@
 import { component, property, Element } from 'nativeweb';
 
 @component('hey-internet')
-export class HeyInternet extends Element {
+class Component extends Element {
     @property() emoji;
 
     render() {
@@ -83,10 +83,10 @@ Define a custom element and add styles. From an external file or the same file. 
 
 ```js
 import { component, Element } from 'nativeweb';
-import { styles } from './hey-styles.css.js';
+import styles from './hey-styles.css.js';
 
 @component('some-styles', styles)
-export class SomeStyles extends Element {
+class Component extends Element {
     render() {
         return `
             <h1>Some Styles</h1>
@@ -98,7 +98,7 @@ export class SomeStyles extends Element {
 ```js
 import { css } from 'nativeweb';
 
-export const styles = css`
+export default css`
     h1 {
         color: orange;
     }
@@ -120,7 +120,7 @@ Get an attribute converted to the specified type or define a property with an op
 import { component, property, Element } from 'nativeweb';
 
 @component('cool-property')
-export class CoolProperty extends Element {
+class Component extends Element {
     @property() cool = 'Cool Prop';
     @property(String) title = 'Default Title';
     @property(Number) multiplier;
@@ -148,14 +148,14 @@ Add an event listener to a component, a child element named `@name` or an extern
 import { component, event, Element } from 'nativeweb';
 
 @component('easy-event')
-export class EasyEvent extends Element {
+class Component extends Element {
     @event() mouseenter = this.onHover();
     @event() click = {
-        title: this.onClick(),
-        button: this.onClick()
+        '@title': this.onClick(),
+        '@button': this.onClick()
     };
     @event() ready = {
-        OtherComponent: this.onReady()
+        'other-component': this.onReady()
     };
 
     onHover() {
@@ -191,7 +191,7 @@ Create a custom global event, namespaced with the component name. Ready to be di
 import { component, customEvent, Element } from 'nativeweb';
 
 @component('other-component')
-export class OtherComponent extends Element {
+class Component extends Element {
     @customEvent() ready = 'Ready 🚀';
 
     connected() {
@@ -220,7 +220,7 @@ Query selector an `@name` child element.
 import { component, query, Element } from 'nativeweb';
 
 @component('simple-query')
-export class SimpleQuery extends Element {
+class Component extends Element {
     @query() title;
 
     connected() {
@@ -249,7 +249,7 @@ Query selector all `@name` child elements.
 import { component, queryAll, Element } from 'nativeweb';
 
 @component('all-query')
-export class AllQuery extends Element {
+class Component extends Element {
     @queryAll() title;
 
     connected() {
@@ -291,13 +291,43 @@ export class AllQuery extends Element {
 
 <br>
 
+### Properties
+
+`this.properties` &nbsp; → &nbsp; Get all attributes.
+
+<br>
+
 ### Tips
+
+[Shared style](#shared-style)
 
 [Composition](#composition)
 
 [Conditional](#conditional)
 
 [Loop](#loop)
+
+[Variable element](#variable-element)
+
+<br>
+
+### Shared style
+
+Include global styles in a component.
+
+```js
+import { css } from 'nativeweb';
+import global from '../global-style.css.js';
+
+export default [
+    global,
+    css`
+        h1 {
+            color: orange;
+        }
+    `
+];
+```
 
 <br>
 
@@ -309,7 +339,7 @@ Component composition with default slot and named slot.
 import { component, Element } from 'nativeweb';
 
 @component('slot-example')
-export class SlotExample extends Element {
+class Component extends Element {
     render() {
         return `
             <header>
@@ -338,7 +368,7 @@ Conditional rendering in vanilla JS.
 import { component, property, Element } from 'nativeweb';
 
 @component('condition-example')
-export class ConditionExample extends Element {
+class Component extends Element {
     @property() isGood = false;
 
     render() {
@@ -347,10 +377,6 @@ export class ConditionExample extends Element {
         `;
     }
 }
-```
-
-```html
-<condition-example></condition-example>
 ```
 
 <br>
@@ -363,7 +389,7 @@ Render loop in vanilla JS.
 import { component, property, Element } from 'nativeweb';
 
 @component('loop-example')
-export class LoopExample extends Element {
+class Component extends Element {
     @property() emojis = ['🤳', '🧨', '🧱'];
 
     render() {
@@ -374,8 +400,29 @@ export class LoopExample extends Element {
 }
 ```
 
+<br>
+
+### Variable element
+
+Render an element from a property.
+
+```js
+import { component, property, Element } from 'nativeweb';
+
+@component('element-example')
+class Component extends Element {
+    @property() as = 'p';
+
+    render() {
+        return `
+            <${this.as}>Heading 1</${this.as}>
+        `;
+    }
+}
+```
+
 ```html
-<loop-example></loop-example>
+<element-example as="h1"></element-example>
 ```
 
 <br>

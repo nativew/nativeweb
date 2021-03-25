@@ -1,1 +1,1 @@
-export { CoolProperty } from './cool-property.js';
+export * from './cool-property';

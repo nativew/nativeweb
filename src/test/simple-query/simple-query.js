@@ -1,7 +1,7 @@
 import { component, query, Element } from '../..';
 
 @component('simple-query')
-export class SimpleQuery extends Element {
+class Component extends Element {
 	@query() title;
 
 	connected() {

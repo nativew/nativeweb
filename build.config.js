@@ -8,6 +8,8 @@ build(
 		target: 'esnext'
 	},
 	{
-		root: 'test'
+		serve: {
+			root: 'test'
+		}
 	}
 );

@@ -1,1 +1,1 @@
-export { EasyEvent } from './easy-event.js';
+export * from './easy-event';

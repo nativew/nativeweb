@@ -1,14 +1,14 @@
 import { component, event, Element } from '../..';
 
 @component('easy-event')
-export class EasyEvent extends Element {
+class Component extends Element {
 	@event() mouseenter = this.onHover();
 	@event() click = {
-		title: this.onClick(),
-		button: this.onClick()
+		'@title': this.onClick(),
+		'@button': this.onClick()
 	};
 	@event() ready = {
-		OtherComponent: this.onReady()
+		'other-component': this.onReady()
 	};
 
 	onHover() {

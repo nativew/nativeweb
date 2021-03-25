@@ -1,7 +1,7 @@
 import { component, property, Element } from '../..';
 
 @component('cool-property')
-export class CoolProperty extends Element {
+class Component extends Element {
 	@property() cool = 'Cool Prop';
 	@property(String) title = 'Default Title';
 	@property(Number) multiplier;

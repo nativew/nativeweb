@@ -1,12 +1,12 @@
 import { component, property, Element } from '../..';
 
-@component('condition-example')
+@component('element-example')
 class Component extends Element {
-	@property() isGood = false;
+	@property() as = 'p';
 
 	render() {
 		return `
-			${this.isGood ? `<h1>Good</h1>` : ``}
+            <${this.as}>Heading 1</${this.as}>
         `;
 	}
 }

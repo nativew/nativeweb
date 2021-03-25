@@ -1,1 +1,1 @@
-export { AllQuery } from './all-query.js';
+export * from './all-query';

@@ -60,20 +60,16 @@ export const event = () => descriptor => {
 					name.startsWith('@')
 				);
 
-				attrs.forEach(attr => callChild(e, attr.name.slice(1), el));
+				attrs.forEach(attr => callChild(e, attr.name, el));
 			}
 		}
 	};
 
 	const checkType = name => {
-		if (name[0] == name[0].toUpperCase()) {
-			externalEvents.push(name);
-			setExternalEvent(name);
+		if (name.startsWith('@')) return (hasChild = true);
 
-			return;
-		}
-
-		hasChild = true;
+		externalEvents.push(name);
+		setExternalEvent(name);
 	};
 
 	const checkChildEvents = () => {

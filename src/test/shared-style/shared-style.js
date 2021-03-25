@@ -1,13 +1,11 @@
 import { component, Element } from '../..';
+import styles from './shared-style.css.js';
 
-@component('slot-example')
+@component('shared-style', styles)
 class Component extends Element {
 	render() {
 		return `
-			<header>
-				<h1><slot name="title"></slot></h1>
-				<slot></slot>
-			</header>
+			<h1>Shared Style</h1>
         `;
 	}
 }

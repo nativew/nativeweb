@@ -16,7 +16,7 @@
 		"build": "npm run format && node build.config.js"
 	},
 	"devDependencies": {
-		"@nativeweb/build": "^1.1.1",
+		"@nativeweb/build": "^1.3.1",
 		"prettier": "^2.2.1"
 	},
 	"files": [
