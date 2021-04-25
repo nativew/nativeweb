@@ -8,6 +8,9 @@ export const property = type => ({ key, initializer }) => {
 			return attr || attr == ''
 				? convertAttribute(attr, type)
 				: initializer && initializer();
+		},
+		set(val) {
+			initializer = () => val;
 		}
 	};
 
